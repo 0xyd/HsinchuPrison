@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<style type="text/css">
+		body { margin: 0px; }
+		html, body { height: 100%; }
+		#EXPAREA { width: 800px; padding: 50px 0px; }
+		#EXPAREA, article  { margin: 0px auto; }
+	</style>
+</head>
+<body>
+	<div id="EXPAREA">
+		<!--[if !IE]><!-->
+		<style type="text/css">
+			/*article * { box-sizing: border-box; }*/
+			#article * { box-sizing: border-box; }
+			.head, .foot { 
+				height: 50px; 
+				width: 100%; 
+				margin: 0px auto; 
+				padding: 0px 10px;
+				border-radius: 10px;
+				background: linear-gradient(0deg, rgb(192, 0, 0), rgb(216, 33,33));
+			}
+			.headwrapper, .headwrapper .item .btn, 
+			.footwrapper, .footwrapper .item .btn
+			{ height: 100%; cursor: pointer; }
+			.headwrapper, .footwrapper { margin: 0px auto; }
+			.head .item, .foot .item { 
+				width: calc(100%/5);
+				height: 100%; 
+				display: inline-block; 
+				border-right: 1px solid #4D4D4D;
+				float: left;
+			}
+			.head .item:hover,
+			.foot .item:hover {
+				background-color: rgb(216, 33, 33);
+			}
+			.head .item:last-child, .foot .item:last-child { border-right: none; }
+			.head .item img, .foot .item img { display: block; margin: 13px auto; }
+			.head .item img:hover, .foot .item img:hover { margin: 14px auto 13px; }
+		</style>
+		<!--<![endif]-->
+		
+		<div id="article" style="height: 100%; width: 100%; position:relative; z-index:0;">
+			<div class="head" >
+				<div class="headwrapper">
+					<div class="item">
+						<a class="btn"><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/緣由.png" /></a>
+					</div>
+					<div class="item">
+						<a class="btn"><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/簡介.png" /></a>
+					</div>
+					<div class="item">
+						<a class="btn"><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/蛻變.png" /></a>
+					</div>
+					<div class="item">
+						<a class="btn"><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/犬隻領養.png" /></a>
+					</div>
+					<div class="item">
+						<a class="btn"><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/剪影.png" /></a>
+					</div>
+				</div>
+			</div>
+			<DIV style="BACKGROUND: 
+						url(http://www.moj.gov.tw/site/moj/public/MMO/scp/home.png) 
+						no-repeat 50% 60%; 
+						height: 600px;" 
+						id="MEDIA_PLAYER"><BR>
+			</DIV>
+			<div class="foot">
+				<div class="footwrapper">
+					<div class="item"><a class='btn'><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/訓練心得.png" /></a></div>
+					<div class="item"><a class='btn'><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/養狗常識.png" /></a></div>
+					<div class="item"><a class='btn'><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/領養狀況.png" /></a></div>
+					<div class="item"><a class='btn'><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/如何領養.png" /></a></div>
+					<div class="item"><a class='btn'><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/犬訓報導.png" /></a></div>
+				</div>
+			</div>
+		</div>
+		<!--[if IE]>
+		<script type="text/javascript">
+			var article = document.querySelector('#article'),
+					head = document.querySelector('.head'),
+					headWrapper = document.querySelector('.headwrapper'),
+					foot = document.querySelector('.foot'),
+					articleAll = article.getElementsByTagName('*');
+
+			for ( var i=0; i < articleAll.length; i++ ) articleAll[i].style.boxSizing = 'border-box';
+
+			head.style.height = '50px';
+			head.style.width = '100%';
+			head.style.margin = '0px auto';
+			head.style.padding = '0px 10px';
+			head.style.position = 'relative';
+			head.style.zIndex = '0';
+			
+			head.style.behavior = 'url(./lib/PIE.htc)';
+			head.style.borderRadius = '10px';
+			/* IE6-9 */
+			head.style.filter = 
+				'progid:DXImageTransform.Microsoft.Gradient(startColorstr="#c00000", endColorstr="#d82121", GradientType=1 )';
+
+			foot.style.height = '50px';
+			foot.style.width = '100%';
+			foot.style.margin = '0px auto';
+			foot.style.padding = '0px 10px';
+			foot.style.borderRadius = '10px';
+			foot.style.backgorund = 'linear-gradient(0deg, rgb(192, 0, 0), rgb(216, 33,33))';
+
+			var headItems = document.querySelectorAll('.head .item'),
+					footItems = document.querySelectorAll('foot .item');
+
+			for ( var i=0; i < headItems.length; i++ ) {
+				var headItem = headItems[i];
+				headItem.style.display = 'inline-block';
+				headItem.style.width = '20%';
+				headItem.style.height = '100%';
+				headItem.style.borderRight = '1px solid #4D4D4D';
+				headItem.style.float = 'left';
+				if ( i === headItems.length-1 ) headItem.style.borderRight = 'none';
+			}
+			console.log(headItems);
+
+		</script>
+		<![endif]-->
+	</div>
+	
+</body>
+</html>
