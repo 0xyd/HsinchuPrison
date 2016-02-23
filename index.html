@@ -46,7 +46,117 @@
 				position: absolute; 
 				display: inline-block; 
 				background-color: #fdfdfd; 
+				top: 0px;
 			}
+			#TOGGLE, #HTOGGLE, #BACKHOME {
+				position: relative;
+				display: none;
+				z-index: 1;
+			}
+			#TOGGLE {
+				height: 100px;
+				width: 50px;
+				top: 100px;
+				left: 90%;
+			}
+			#HTOGGLE {
+				height: 50px;
+				width: 100px;
+				top: 600px;
+				left: 13%;
+			}
+			#BACKHOME {
+				width: 50px;
+				top: 600px;
+				left: -11%;
+			}
+
+			#BACKHOME .btn { border-radius: 5px; }
+			#HTOGGLE .btn { width: 50px; }
+			#TOGGLE .btn, #HTOGGLE .btn, #BACKHOME .btn { height: 50px; }
+
+			#TOGGLE .btn:first-child, 
+			#TOGGLE .btn:last-child, 
+			#HTOGGLE .btn, #BACKHOME .btn {
+				border: 1px solid #ccc;
+				background-color: #fafafa;
+				opacity: 0.3;
+			}
+
+			#TOGGLE .btn:first-child { border-radius: 5px 5px 0px 0px; }
+			#TOGGLE .btn:last-child { border-radius: 0px 0px 5px 5px; }
+
+			#HTOGGLE .btn { display: inline-block; position: absolute; }
+			#HTOGGLE .btn:first-child { left: 0px; }
+			#HTOGGLE .btn:last-child { left: 50px; }
+
+			#TOGGLE .btn:first-child:hover, 
+			#TOGGLE .btn:last-child:hover,
+			#HTOGGLE .btn:hover,
+			#BACKHOME .btn:hover {
+				opacity: 0.8;
+			}
+
+			.arrow { 
+				position: relative;
+				height: 100%;
+			}
+			.arrow-br {
+				position: absolute;
+				display: inline-block;
+				width: 15px; 
+				height: 2px;
+				background-color: #000;
+			}
+			.arrow.up > .arrow-br:first-child { 
+				transform-origin: left center; 
+				transform: rotate(-45deg); 
+			}
+			.arrow.up > .arrow-br:last-child { 
+				transform-origin: right center; 
+				transform: rotate(45deg); 
+			}
+			.arrow.down > .arrow-br:first-child { 
+				transform-origin: left center; 
+				transform: rotate(45deg); 
+			}
+			.arrow.down > .arrow-br:last-child { 
+				transform-origin: right center; 
+				transform: rotate(-45deg); 
+			}
+			.arrow.up > .arrow-br { top: 30px; }
+			.arrow.down > .arrow-br { bottom: 30px; }
+			.arrow.up > .arrow-br:first-child, 
+			.arrow.down > .arrow-br:first-child { 
+				left: 13.5px; 
+			}
+			.arrow.up > .arrow-br:last-child, 
+			.arrow.down > .arrow-br:last-child { 
+				right: 13.5px; 
+			}
+			.arrow.left > .arrow-br:first-child,			
+			.arrow.left > .arrow-br:last-child,
+			.arrow.right > .arrow-br:first-child,			
+			.arrow.right > .arrow-br:last-child {
+				top: 23px;
+				left: 16.04504871165134px;
+			}
+			.arrow.left > .arrow-br:first-child,			
+			.arrow.left > .arrow-br:last-child {
+				transform-origin: 0px 1px;
+			}
+			.arrow.right > .arrow-br:first-child,			
+			.arrow.right > .arrow-br:last-child {
+				transform-origin: 15px 1px;
+			}
+			.arrow.left > .arrow-br:first-child, .arrow.right > .arrow-br:last-child 
+			{ transform: rotate(-45deg); }
+			.arrow.left > .arrow-br:last-child, .arrow.right > .arrow-br:first-child	
+			{ transform: rotate(45deg); }			
+			#TOGGLE .btn:first-child { border-bottom: 1px solid #ccc; }
+			
+			#BACKHOME .arrow.left { display: inline-block; }
+
 			#INDEX { left: 0%; }
 			#ORIGIN_DISPLAY { left: 100%; }
 			#INTRO_DISPLAY { left: 200%; }
@@ -59,6 +169,14 @@
 			#ADOP_HOW_DISPLAY { left: 900%; }
 			#NEWS_DISPLAY { left: 1000%; }
 
+			#INTRO_DISPLAY > div { position: absolute; }
+			#INTRO_DISPLAY > div:first-child { top: 0%; }
+			#INTRO_DISPLAY > div:nth-child(2) { top: 100%; }
+			#INTRO_DISPLAY > div:nth-child(3) { top: 200%; }
+			#INTRO_DISPLAY > div:nth-child(4) { top: 300%; }
+			#INTRO_DISPLAY > div:nth-child(5) { top: 400%; }
+
+
 			.display-slide { height: 100%; padding: 100px 0px; opacity: 0; }
 			.space-slide { height: 100%; }
 			.display-slide:first-child { opacity: 1; }
@@ -69,6 +187,10 @@
 			{ display: inline-block; vertical-align: middle; }
 
 			img.central { display: block; margin: 0px auto; }
+
+			::-webkit-scrollbar {
+				display: none;
+			}
 
 			.b12-col-md-12, .b12-col-md-11, .b12-col-md-10, 
 			.b12-col-md-9, .b12-col-md-8, .b12-col-md-7, 
@@ -120,8 +242,6 @@
 			.b15-col-md-4 { width: calc(100%/15*4); }
 			.b15-col-md-3 { width: calc(100%/5); }
 
-
-
 			/*.row,
 			.b12-row-md-12, .b12-row-md-11, .b12-row-md-10,
 			.b12-row-md-9, .b12-row-md-8, .b12-row-md-7,
@@ -145,23 +265,63 @@
 		</style>
 		<!--<![endif]-->
 		<div id="CAROUSEL" style="height: 100%; width: 100%; position: relative; z-index: 0;">
-			<div id="INDEX" class="pony current" style="height: 100%; width: 100%; z-index: 0;">
+			<div id="TOGGLE" >
+				<div id="PREV_SLIDE" class="btn">
+					<div class="arrow up">
+						<div class="arrow-br"></div>
+						<div class="arrow-br"></div>
+					</div>
+				</div>
+				<div id="NEXT_SLIDE" class="btn">
+					<div class="arrow down">
+						<div class="arrow-br"></div>
+						<div class="arrow-br"></div>
+					</div>
+				</div>
+			</div>
+			<div id="HTOGGLE">
+				<div id="PREV_THEME" class="btn">
+					<div class="arrow left">
+						<div class="arrow-br"></div>
+						<div class="arrow-br"></div>
+					</div>
+				</div>
+				<div id="NEXT_THEME" class="btn">
+					<div class="arrow right">
+						<div class="arrow-br"></div>
+						<div class="arrow-br"></div>
+					</div>
+				</div>
+			</div>
+			<div id="BACKHOME">
+				<div class="btn">
+					<div class="arrow left">
+						<div class="arrow-br"></div>
+						<div class="arrow-br"></div>						
+					</div>
+					<div class="arrow left">
+						<div class="arrow-br"></div>
+						<div class="arrow-br"></div>						
+					</div>
+				</div>
+			</div>
+			<div id="INDEX" class="pony current-theme" style="height: 100%; width: 100%; z-index: 0;">
 				<div class="head" >
 					<div class="headwrapper">
 						<div id="ORIGIN" class="item">
-							<a class="btn"><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/緣由.png" /></a>
+							<a class="btn"><img alt="犬訓班創立緣由" src="http://www.moj.gov.tw/site/moj/public/MMO/scp/緣由.png" /></a>
 						</div>
 						<div id="INTRO" class="item">
-							<a class="btn"><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/簡介.png" /></a>
+							<a class="btn"><img alt="犬訓班簡介" src="http://www.moj.gov.tw/site/moj/public/MMO/scp/簡介.png" /></a>
 						</div>
 						<div id="TRANS" class="item">
-							<a class="btn"><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/蛻變.png" /></a>
+							<a class="btn"><img alt="" src="http://www.moj.gov.tw/site/moj/public/MMO/scp/蛻變.png" /></a>
 						</div>
 						<div id="ADOPTION" class="item">
-							<a class="btn"><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/犬隻領養.png" /></a>
+							<a class="btn"><img alt="領養犬隻說明" src="http://www.moj.gov.tw/site/moj/public/MMO/scp/犬隻領養.png" /></a>
 						</div>
 						<div id="PHOTO" class="item">
-							<a class="btn"><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/剪影.png" /></a>
+							<a class="btn"><img alt="犬訓班相片集" src="http://www.moj.gov.tw/site/moj/public/MMO/scp/剪影.png" /></a>
 						</div>
 					</div>
 				</div>
@@ -174,19 +334,19 @@
 				<div class="foot">
 					<div class="footwrapper">
 						<div id="REVIEW" class="item">
-							<a class='btn'><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/訓練心得.png" /></a>
+							<a class='btn'><img alt="訓練學生心得" src="http://www.moj.gov.tw/site/moj/public/MMO/scp/訓練心得.png" /></a>
 						</div>
 						<div id="KNOWLEDGE" class="item">
-						<a class='btn'><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/養狗常識.png" /></a>
+						<a class='btn'><img alt="" src="http://www.moj.gov.tw/site/moj/public/MMO/scp/養狗常識.png" /></a>
 						</div>
 						<div id="ADOP_STATUS" class="item">
-							<a class='btn'><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/領養狀況.png" /></a>
+							<a class='btn'><img alt="目前犬隻領養情形" src="http://www.moj.gov.tw/site/moj/public/MMO/scp/領養狀況.png" /></a>
 						</div>
 						<div id="ADOP_HOW" class="item">
-							<a class='btn'><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/如何領養.png" /></a>
+							<a class='btn'><img alt="領養犬隻說明" src="http://www.moj.gov.tw/site/moj/public/MMO/scp/如何領養.png" /></a>
 						</div>
 						<div id="NEWS" class="item">
-							<a class='btn'><img src="http://www.moj.gov.tw/site/moj/public/MMO/scp/犬訓報導.png" /></a>
+							<a class='btn'><img alt="媒體採訪與報導" src="http://www.moj.gov.tw/site/moj/public/MMO/scp/犬訓報導.png" /></a>
 						</div>
 					</div>
 				</div>
@@ -199,34 +359,34 @@
 					<div class='b12-col-md-6 ' style='height: 100%;'>
 						<span class='ver-helper'></span>
 						<div class='imagewrapper--ver-mid'>
-							<img class="central" src='./src/簡介一左側照片.png'/>
+							<img alt="" class="central" src='./src/簡介一左側照片.png'/>
 						</div>
 					</div>
 					<div class='b12-col-md-6' style="height: 100%;">
 						<div class="b12-col-md-12" style="height: 20%;">
 							<span class="ver-helper"></span>
 							<div style="display: inline-block; margin-left: 30px;">
-								<img src="./src/簡介一簡介字體.png" />
+								<img alt="" src="./src/簡介一簡介字體.png" />
 							</div>
 						</div>						
 						<div class="b12-col-md-12" style="height: 65%;">
 							<div class="b12-col-md-12">
 								<span class="ver-helper"></span>
 								<div class="b12-col-md-12">
-									<img class="central" src="./src/簡介一右側狗像.png" />
+									<img alt="" class="central" src="./src/簡介一右側狗像.png" />
 								</div>
 							</div>
 							<div class="b12-col-md-12">
 								<span class="ver-helper"></span>
 								<div class="b12-col-md-12">
-									<img class="central" src="./src/犬訓橫向合體.png" />
+									<img alt="" class="central" src="./src/犬訓橫向合體.png" />
 								</div>
 							</div>
 						</div>
 						<div class="b12-col-md-12 b12-row-md-2" style="height: 15%;">
 							<span class="ver-helper"></span>
 							<div class="b12-col-md-12">
-								<img class="central" src="./src/法務部矯正署新竹監獄.png" />
+								<img alt="" class="central" src="./src/法務部矯正署新竹監獄.png" />
 							</div>
 						</div>
 					</div>
@@ -237,7 +397,7 @@
 						<div style="height: 100%; margin: 0px auto;">
 							<span class="ver-helper"></span>
 							<div class="imagewrapper--ver-mid">
-								<img class="central" src="./src/簡介二相片.png" />
+								<img alt="" class="central" src="./src/簡介二相片.png" />
 							</div>
 						</div>
 					</div>
@@ -245,19 +405,19 @@
 						<div class="b12-row-md-3 b12-col-md-12">
 							<span class="ver-helper"></span>
 							<div class="imagewrapper--ver-mid b12-col-md-12">
-								<img class="central" src="./src/期許-web.png" />
+								<img alt="" class="central" src="./src/期許-web.png" />
 							</div>
 						</div>
 						<div class="b12-row-md-2 b12-col-md-offset-2 b12-col-md-10">
-							<img src="./src/重拾收容人信心.png" />
+							<img alt="" src="./src/重拾收容人信心.png" />
 						</div>
 						<div class="b12-row-md-2 b12-col-md-offset-2 b12-col-md-10">
-							<img src="./src/流浪狗不再流浪.png" />
+							<img alt="" src="./src/流浪狗不再流浪.png" />
 						</div>
 						<div class="b12-col-md-offset-1 b12-col-md-11 b12-row-md-5">
 							<span class="ver-helper"></span>
 							<div class="imagewrapper--ver-mid">
-								<img class="central" src="./src/法務部矯正署新竹監獄.png" />
+								<img alt="" class="central" src="./src/法務部矯正署新竹監獄.png" />
 							</div>
 						</div>
 					</div>
@@ -268,7 +428,7 @@
 						<div class="b12-row-md-7 b12-col-md-12">
 							<span class="ver-helper"></span>
 							<div class="imagewrapper--ver-mid b12-col-md-12">
-								<img src="./src/訓練師照.png" />
+								<img alt="" src="./src/訓練師照.png" />
 							</div>
 						</div>
 						<div class="b12-row-md-5  b12-col-md-12">
@@ -276,13 +436,13 @@
 								 style="text-align:center;">
 								<span class="ver-helper"></span>
 								<div class="imagewrapper--ver-mid">
-									<img src="./src/陳鉅龍.png" />
+									<img alt="" src="./src/陳鉅龍.png" />
 								</div>
 							</div>
 							<div class="b12-row-md-1" style="left: 50%;">
 								<span class="ver-helper"></span>
 								<div class="imagewrapper--ver-mid">
-									<img src="./src/昇旺犬訓訓練師.png" />
+									<img alt="" src="./src/昇旺犬訓訓練師.png" />
 								</div>
 							</div>
 						</div>
@@ -292,12 +452,12 @@
 							 style="text-align:center;">
 							<span class="ver-helper"></span>
 							<div class="imagewrapper--ver-mid">
-								<img src="./src/訓練師之言.png" />
+								<img alt="" src="./src/訓練師之言.png" />
 							</div>
 						</div>
 						<div class="b12-col-md-12 b12-row-md-10" 
 							 style="overflow-x:hidden; overflow-y: scroll;">
-							<img class="central" src="./src/訓練師之言內容.png" />
+							<img alt="" class="central" src="./src/訓練師之言內容.png" />
 						</div>
 					</div>
 				</div>
@@ -340,53 +500,174 @@
 			var carouselClass = function() {
 
 				this.$CAROUSEL = $('#CAROUSEL');
-				this.children = this.$CAROUSEL.children();
+				this.children = this.$CAROUSEL.children('.pony');
+
+				// The buttons control the slides'movement
+				this.toggleUp = $('#TOGGLE .btn:first-child');
+				this.toggleDown = $('#TOGGLE .btn:last-child');
+
+				// The buttons control the horizontal movement for theme changing
+				this.htogglePrev = $('#HTOGGLE .btn:first-child');
+				this.htoggleNext = $('#HTOGGLE .btn:last-child');
+
+				// The button shifts the page to the index
+				this.backHome = $('#BACKHOME .btn');
+
 				this.grandChidren = null;
-				this.endIndex = 0;
-				this.startIndex = this.$CAROUSEL.find('.current').index();
+
+				// Settings for themes
+				this.currentTheme = this.$CAROUSEL.find('.current-theme');
+				this.endThemeIndex = 0;
+				this.startThemeIndex = this.currentTheme.index();
+
+				// Setting for slides
+				this.currentSlide = this.$CAROUSEL.find('.current-slide');
+				this.currentSlideIndex = 0;
+
 				this.delta = parseInt(this.$CAROUSEL.css('width').replace('px', ''));
-				this.displacement = this.delta * (this.endIndex - this.startIndex) * -1;
+
+				// The horizontal movement of the theme changes
+				this.displacement = this.delta * (this.endThemeIndex - this.startThemeIndex) * -1;
 			}
 
-			carouselClass.prototype.switchSlide = function(clickedObj) {
+			/* Everything about Themes */
+			carouselClass.prototype.chooseTheme = function(clickedObj) {
 
-				var slide = '#'+clickedObj.id+'_DISPLAY';
+				var themeId = '#'+clickedObj.id+'_DISPLAY';
 
-				this._updateEndIdx(slide)
-				this._calcDisplacement();
+				this.updateThemeEndIdx(themeId);
+				this.calcDisplacement();
+
+				// Display the toggle
+				$("#TOGGLE").css('display', 'inline-block');
+
+				// Display the HTOGGLE button
+				$("#HTOGGLE").css('display', 'inline-block');
+
+				// Display the Back home nutton
+				$("#BACKHOME").css('display', 'inline-block');
 
 				// Activate the carousel motion.
+				this.themeShifting();
+
+				// update current theme
+				this.updateCurrentTheme(themeId);
+
+				// Add 'current' class to the slide
+				this.updateStartThemeIdx(themeId);
+			}
+
+			carouselClass.prototype.getPrevThemeId = function() {
+				return '#' + this.$CAROUSEL
+					.find('.current-theme')
+						.prev().attr('id')
+			}
+
+			carouselClass.prototype.getNextThemeId = function() {
+
+				var nextThemeId = 
+						this.$CAROUSEL
+							.find('.current-theme')
+							.next().attr('id');
+
+				if ( nextThemeId ) return '#' + nextThemeId
+				else return null
+
+			}
+
+			carouselClass.prototype.updateStartThemeIdx = function(objID) {
+				this.startThemeIndex = 
+					this.$CAROUSEL
+						.children(objID).index();
+			}
+
+			carouselClass.prototype.updateThemeEndIdx = function(objID) {
+				this.endThemeIndex = 
+					this.$CAROUSEL
+						.children(objID).index();
+			}
+			
+			carouselClass.prototype.updateCurrentTheme = function(objID) {
+
+				this.$CAROUSEL
+					.find('.current-theme')
+					.removeClass('current-theme'); 
+
+				this.currentTheme = $(objID).addClass('current-theme');
+
+			}
+
+			carouselClass.prototype.calcDisplacement = function() {
+				this.displacement = 
+					this.delta * (this.endThemeIndex - this.startThemeIndex) * -1;
+			}
+
+			carouselClass.prototype.themeShifting = function() {
+
 				for (var i=0; i < this.children.length; i++) {
 
 					var originLeft = 
 						parseInt($(this.children[i]).css('left').replace('px', ''));
-					
+
 					$(this.children[i]).animate(
-						// 17 is for hidding rigt scroll bar
-						{ left: originLeft + this.displacement + 17}, 
+						{ 
+							left: originLeft + this.displacement
+						}, 
 						800, 
 						function() {}
 					);
 				}
+			}
+
+			/* Everything about slides */
+			carouselClass.prototype.initialCurrentSlide = function() {
+
+				this.$CAROUSEL
+					.find('.current-slide')
+						.removeClass('current-slide');
+
+				this.currentSlide = 
+					this.currentTheme.find('.display-slide')
+						.first().addClass('current-slide');
+
+				this.currentSlide.css('opacity', 1);
+				this.currentSlide.siblings('.display-slide').css('opacity', 0);
+
+				this.currentSlideIndex = this.currentSlide.index();
+
+				var d = parseInt(this.currentSlide.css('top'));
+
+				if (d) {
+					
+					var childSlides = 
+							this.currentTheme.children();
+
+					for ( var i = 0; i < childSlides.length; i++ ) {
+
+						$(childSlides[i])
+							.animate(
+								{ top: '+=' + -d }, 
+								500, 
+								function() {});
+					}
+				}
+			}
+
+			carouselClass.prototype.updateCurrentSlide = function(newSlide) {
+
+				this.$CAROUSEL
+					.find('.current-slide')
+						.removeClass('current-slide');
+				// this.currentTheme
+				// 	.find('.current-slide')
+				// 		.removeClass('current-slide');
+
+				this.currentSlide = $(newSlide).addClass('current-slide');
+				this.currentSlideIndex = this.currentSlide.index();
 
 			}
 
-			carouselClass.prototype._updateEndIdx = function(obj) {
-				this.endIndex = 
-					this.$CAROUSEL
-						.children(obj).index();
-			}
-
-			carouselClass.prototype._calcDisplacement = function() {
-				this.displacement = 
-					this.delta * (this.endIndex - this.startIndex) * -1;
-			}
-
-			carouselClass.prototype._listChildren = function(parent) {
-				console.log($(parent).children());
-			}
-
-			carouselClass.prototype.gradDisplay = function(clickedObj) {
+			carouselClass.prototype.rollDisplay = function(clickedObj) {
 
 				var $player = $('#'+clickedObj.id+'_DISPLAY'),
 					parent = $player.parent(),
@@ -404,7 +685,7 @@
 				$player.scroll(
 					function() {
 						current = $player.scrollTop();
-						var delta = (current-prev),
+						var delta = current-prev,
 							index = parseInt(current/slideHeight),
 							sIndex = index.divide(2).q,  // Index of slides
 							$cSlide = $(slides[sIndex]),
@@ -434,7 +715,7 @@
 											parseFloat($cSlide.css('opacity')) -
 												delta * gradient;
 
-										return opacityVal < 0? 0: opacityVal
+										return opacityVal < 0 ? 0: opacityVal
 									});
 							}
 
@@ -448,7 +729,7 @@
 											parseFloat($nxtSlide.css('opacity')) -
 												Math.abs(delta) * gradient;
 										
-										return opacityVal < 0? 0: opacityVal
+										return opacityVal < 0 ? 0: opacityVal
 									});
 							} else if (index.divide(2).r === 0) {
 								
@@ -466,18 +747,196 @@
 					});
 			}
 
+			// Shift the slides
+			carouselClass.prototype.shiftingSlide = function(dSlide, dirDown) {
+
+				var dSlideIdx = dSlide ? $(dSlide).index() : null,
+					slides = this.currentTheme.children(),
+					slideShiftDisplacement = this.$CAROUSEL.outerHeight(),
+
+					// How many blocks should move
+					blockNumber = 
+						Math.abs(this.currentSlide.index() - dSlideIdx), 
+
+					dirDown = dirDown ? '-=' : '+=';
+
+				console.log(blockNumber);
+
+				if ( dSlide ) {
+
+					for ( var i = 0; i < slides.length; i++) {
+
+						var $SLIDE = $(slides[i]);
+					
+						// Hide the current slide while sliding
+						if ( i === this.currentSlideIndex ) {
+
+							$SLIDE.animate(
+								{
+									top: dirDown + blockNumber*slideShiftDisplacement,
+									opacity: blockNumber ? 
+										0 : $SLIDE.css('opacity')
+								}, 
+								2000, 
+								function() {});
+	
+						// Display the prev slide while rolling
+						} else if ( i === dSlideIdx ) {
+					
+							$SLIDE.animate(
+								{
+									// top: dirDown + 2*slideShiftDisplacement,
+									top: dirDown + blockNumber*slideShiftDisplacement,
+									opacity: 1
+								}, 
+								2000, 
+								function() {});
+
+							// Make the destination slide to be current one
+							this.updateCurrentSlide(dSlide);
+						// 
+						} else {
+
+							$SLIDE.animate(
+								{
+									// top: dirDown + 2*slideShiftDisplacement,
+									top: dirDown + blockNumber*slideShiftDisplacement,
+								}, 
+								2000, 
+								function() {});
+						}
+
+					}
+				}
+			}
+
 			var carousel = new carouselClass();
 
 			$('.head .item')
 				.on('click', function(e) {
-					carousel.switchSlide(this);
-					carousel.gradDisplay(this);
+					carousel.chooseTheme(this);
+					carousel.rollDisplay(this);
+					carousel.themeShifting();
+					carousel.initialCurrentSlide();
 				});
+
 			$('.foot .item')
 				.on('click', function(e) {
-					carousel.switchSlide(this);
-					carousel.gradDisplay(this);
+					carousel.chooseTheme(this);
+					carousel.rollDisplay(this);
+					carousel.themeShifting();
+					carousel.initialCurrentSlide();
 				});
+
+			$('#BACKHOME .btn').on('click', function(e) {
+				carousel.updateThemeEndIdx('#INDEX');
+				carousel.calcDisplacement();
+				carousel.themeShifting();
+				carousel.updateStartThemeIdx('#INDEX');
+				carousel.updateCurrentTheme('#INDEX');
+				$("#TOGGLE").css('display', 'none');
+				$("#HTOGGLE").css('display', 'none');
+				$("#BACKHOME").css('display', 'none');
+			});
+
+			$('#PREV_SLIDE').on('click', function(e) {
+
+				var 
+					// The target slide we want to read
+					prevSlide = carousel.currentTheme
+						.children()[carousel.currentSlideIndex - 2];
+
+				carousel.shiftingSlide(prevSlide, false);
+			});
+
+			$('#NEXT_SLIDE').on('click', function(e) {
+
+				var 
+					// The target slide we want to read
+					nextSlide = carousel.currentTheme
+						.children()[carousel.currentSlideIndex + 2];
+
+				carousel.shiftingSlide(nextSlide, true);
+			});
+
+			$('#PREV_THEME').on('click', function(e) {
+
+				var prevThemeId = carousel.getPrevThemeId();
+
+				carousel.updateThemeEndIdx(prevThemeId);
+				carousel.calcDisplacement();
+				carousel.themeShifting();
+				carousel.updateStartThemeIdx(prevThemeId);
+				carousel.updateCurrentTheme(prevThemeId);
+				// carousel.updateCurrentSlide();
+
+				if ( prevThemeId === '#INDEX' ) {
+					$("#TOGGLE").css('display', 'none');
+					$("#HTOGGLE").css('display', 'none');
+					$("#BACKHOME").css('display', 'none');
+				}
+
+				// Make the slides under the prev theme back to its original state
+				var 
+					childSlides = carousel.currentTheme.children()
+					startSlide = childSlides[0]; 
+
+				carousel.updateCurrentSlide( 
+					(function() {
+						var l = childSlides.length;
+						for ( var i = 0; i < l; i++ ) 
+							if ($(childSlides[i]).css('top') === '0px')
+								return childSlides[i]
+					})());
+				
+				carousel.shiftingSlide(startSlide, false);
+
+			});
+
+			$('#NEXT_THEME').on('click', function(e) {
+
+				var nextThemeId = carousel.getNextThemeId();
+
+				if ( nextThemeId ) {
+
+					carousel.updateThemeEndIdx(nextThemeId);
+					carousel.calcDisplacement();
+					carousel.themeShifting();
+					carousel.updateStartThemeIdx(nextThemeId);
+					carousel.updateCurrentTheme(nextThemeId);
+
+				} else {
+
+					carousel.updateThemeEndIdx('#INDEX');
+					carousel.calcDisplacement();
+					carousel.themeShifting();
+					carousel.updateStartThemeIdx('#INDEX');
+					carousel.updateCurrentTheme('#INDEX');
+					$("#TOGGLE").css('display', 'none');
+					$("#HTOGGLE").css('display', 'none');
+					$("#BACKHOME").css('display', 'none');
+
+				}
+
+				// The slides under the theme
+				var childSlides = carousel.currentTheme.children(),
+
+				// Make the start slide
+					startSlide = childSlides[0];
+				
+				// Make the the slide which top is 0 px becomes the current slide
+				carousel.updateCurrentSlide( 
+					(function() {
+						var l = childSlides.length;
+						for ( var i = 0; i < l; i++ ) 
+							if ($(childSlides[i]).css('top') === '0px')
+								return childSlides[i]
+					})());
+
+				carousel.shiftingSlide(startSlide, false);
+
+			});
+
 
 		</script>
 		<!--[if IE]>
